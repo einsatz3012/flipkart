@@ -22,6 +22,7 @@ const responsive = {
 const Image = styled("img")({
   width: "100%",
   height: "280px",
+  objectFit: "cover",
 });
 
 const Banner = () => {
