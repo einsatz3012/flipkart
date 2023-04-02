@@ -7,6 +7,11 @@ const Component = styled(Box)`
   display: flex;
   justify-content: space-between;
   margin: 55px 130px 0 130px;
+
+  @media screen and (max-width: 1200px) {
+    margin: 0px 10px;
+    overflow: overlay;
+  }
 `;
 
 const Container = styled(Box)`
