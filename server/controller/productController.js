@@ -8,3 +8,15 @@ export const getProducts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getProductById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const product = await Product.findOne({ id });
+    if (product) res.status(200).json(product);
+    else res.status(404).json({ message: "Product Not Found" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
