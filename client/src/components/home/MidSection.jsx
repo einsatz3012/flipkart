@@ -30,7 +30,7 @@ const MidSection = () => {
         xs={12}
         style={{ marginTop: "10px", justifyContent: "space-between" }}
       >
-        {imageURL.map((image) => (
+        {imageURL.map((image, i) => (
           <Grid item lg={4} sm={4} md={12} xs={12}>
             <img src={image} alt="" style={{ width: "100%" }} />
           </Grid>
