@@ -18,16 +18,26 @@ const Wrapper = styled(Box)`
     margin-right: 40px;
     font-size: 16px;
   }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    gap: 5px;
+    align-items: baseline;
+  }
 `;
 
 const Container = styled(Box)`
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 900px) {
+    display: block;
+  }
 `;
 
 const LoginButton = styled(Button)`
   color: #2874f0;
-  background: #fff;
+  background: #ffffff;
   text-transform: none;
   padding: 5px 40px;
   border-radius: 2px;
@@ -36,7 +46,16 @@ const LoginButton = styled(Button)`
   height: 32px;
 
   &:hover {
-    background: #fff;
+    background: #ffffff;
+  }
+
+  @media screen and (max-width: 900px) {
+    background: #2874f0;
+    color: #ffffff;
+
+    &:hover {
+      background: #2874f0;
+    }
   }
 `;
 

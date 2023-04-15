@@ -64,7 +64,7 @@ const Text = styled(Typography)`
   margin-top: 5px;
 `;
 
-const Slide = ({ products, title, timer = false }) => {
+const Slide = ({ products = [], title, timer = false }) => {
   const timerURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg";
 
