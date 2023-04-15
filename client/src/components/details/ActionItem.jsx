@@ -5,6 +5,10 @@ import React from "react";
 const LeftContainer = styled(Box)`
   min-width: 40%;
   padding: 40px 0 0 80px;
+
+  @media screen and (max-width: 1280px) {
+    padding: 20px 40px;
+  }
 `;
 
 const Image = styled("img")({
@@ -16,6 +20,10 @@ const StyledButton = styled(Button)`
   width: 48%;
   height: 50px;
   border-radius: 5px;
+
+  @media screen and (max-width: 1000px) {
+    font-size: 12px;
+  }
 `;
 
 const ActionItem = ({ product }) => {
