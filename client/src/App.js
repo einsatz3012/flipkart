@@ -1,6 +1,8 @@
 // components
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
+import Cart from "./components/cart/Cart";
+
 import { Box } from "@mui/system";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -16,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<DetailView />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
       </BrowserRouter>
