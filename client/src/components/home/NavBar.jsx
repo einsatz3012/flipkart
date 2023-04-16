@@ -27,14 +27,16 @@ const Text = styled(Typography)`
 
 const NavBar = () => {
   return (
-    <Component>
-      {navData.map((data) => (
-        <Container key={data.text}>
-          <img src={data.url} alt={data.text} style={{ width: "64px" }} />
-          <Text>{data.text}</Text>
-        </Container>
-      ))}
-    </Component>
+    <Box style={{ backgroundColor: "#ffffff" }}>
+      <Component>
+        {navData.map((data) => (
+          <Container key={data.text}>
+            <img src={data.url} alt={data.text} style={{ width: "64px" }} />
+            <Text>{data.text}</Text>
+          </Container>
+        ))}
+      </Component>
+    </Box>
   );
 };
 

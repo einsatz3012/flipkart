@@ -23,6 +23,7 @@ const Container = styled(Grid)`
 
 const RightContainer = styled(Grid)`
   margin-top: 50px;
+  padding-left: 40px;
   & > p {
     margin-top: 10px;
   }
@@ -37,18 +38,16 @@ const DetailView = () => {
     if (product && id !== product.id) dispatch(getProductDetails(id));
   }, [dispatch, id, loading, product]);
 
-  console.log(product);
-
   const isProductExists = product && Object.keys(product).length > 0;
 
   return (
     <Component>
       {!loading && isProductExists && (
         <Container container>
-          <Grid item lg={4} md={4} sm={8} xs={12}>
+          <Grid item lg={4} md={4} sm={9} xs={12}>
             <ActionItem product={product} />
           </Grid>
-          <RightContainer item lg={8} md={8} sm={8} xs={12}>
+          <RightContainer item lg={8} md={8} sm={9} xs={12}>
             <ProductDetail product={product} />
           </RightContainer>
         </Container>
