@@ -7,6 +7,9 @@ import TotalBalance from "./TotalBalance";
 import styled from "@emotion/styled";
 import EmptyCart from "./EmptyCart";
 
+import { payUsingPaytm } from "../../service/api";
+import { post } from "../../utils/paytm";
+
 const Container = styled(Grid)`
   padding: 30px 135px;
 
@@ -51,6 +54,16 @@ const LeftComponent = styled(Grid)`
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
+  const buyNow = async () => {
+    const response = await payUsingPaytm({ amount: 500, email: "chotu@gmail.com" });
+    let information = {
+      action: "https://securegw.paytm.in/order/process",
+      params: response,
+    };
+
+    post(information);
+  };
+
   return (
     <>
       {cartItems.length > 0 ? (
@@ -64,7 +77,7 @@ const Cart = () => {
               <CartItem key={item.id} item={item} />
             ))}
             <ButtonWrapper>
-              <StyledButton>Place Order</StyledButton>
+              <StyledButton onClick={() => buyNow()}>Place Order</StyledButton>
             </ButtonWrapper>
           </LeftComponent>
           <Grid item lg={3} md={3} sm={12} xs={12}>
