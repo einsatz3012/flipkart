@@ -69,15 +69,18 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Toolbar style={{ minHeight: "55px", display:"flex", justifyContent: "space-between" }}>
+      <Toolbar
+        style={{
+          minHeight: "55px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <MenuButton onClick={() => setOpen(true)}>
           <Menu />
         </MenuButton>
 
-        <StyledDrawer
-          open={open}
-          onClose={() => setOpen(false)}
-        >
+        <StyledDrawer open={open} onClose={() => setOpen(false)}>
           {list()}
         </StyledDrawer>
 

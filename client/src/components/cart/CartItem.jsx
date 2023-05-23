@@ -49,7 +49,7 @@ const CartItem = ({ item }) => {
           alt={item.title.shortTitle}
           style={{ width: "110px", height: "110px" }}
         />
-        <ButtonGroup />
+        <ButtonGroup quantity={item.quantity} />
       </LeftComponent>
       <Box style={{ margin: "20px" }}>
         <Typography>{addEllipsis(item.title.longTitle)}</Typography>

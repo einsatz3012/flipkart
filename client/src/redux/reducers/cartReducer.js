@@ -10,7 +10,9 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         return {
           ...state,
           cartItems: state.cartItems.map((data) =>
-            data.product === exist.product ? item : data
+            data.id === exist.id
+              ? { ...data, quantity: data.quantity + 1 }
+              : data
           ),
         };
       } else {

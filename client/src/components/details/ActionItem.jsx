@@ -1,13 +1,14 @@
 import { Box, Button, styled } from "@mui/material";
 import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 
 import { addToCart } from "../../redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { payUsingPaytm } from "../../service/api";
-import { post } from "../../utils/paytm";
+import { payUsingStripe } from "../../service/api";
+import { DataContext } from "../../context/DataProvider";
 
 const LeftContainer = styled(Box)`
   min-width: 40%;
@@ -33,54 +34,72 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const stripePromise = loadStripe(
+  "pk_test_51N7c2ESAtE7P9nT4cm0T8ujTp8ijqecf1Ovv1adnvuYPJbZYZQcC6Lhz56tAUzwGip1MbUF8noyvK0vxaSaOJgMq00iM8v3UsZ"
+);
+
 const ActionItem = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [quantity, setQuantity] = useState(1);
+  const { account } = useContext(DataContext);
+  const [quantity] = useState(1);
 
   const addItemToCart = () => {
+    if (!account) {
+      return;
+    }
+
     dispatch(addToCart(product.id, quantity));
     navigate("/cart");
   };
 
   const buyNow = async () => {
-    const response = await payUsingPaytm({ amount: 500, email: "chotu@gmail.com" });
-    let information = {
-      action: "https://securegw.paytm.in/order/process",
-      params: response,
+    if (!account) return;
+
+    const stripe = await stripePromise;
+    const requestBody = {
+      userName: account,
+      email: `${account}@gmail.com`,
+      products: { id: product.id, count: 1 },
     };
 
-    post(information);
+    const response = await payUsingStripe(requestBody);
+
+    await stripe.redirectToCheckout({
+      sessionId: response.id,
+    });
   };
 
   return (
-    <LeftContainer>
-      <Box
-        style={{
-          padding: "15px 20px",
-          border: "1px solid #f0f0f0",
-        }}
-      >
-        <Image src={product.detailUrl} alt="" />
-      </Box>
-      <StyledButton
-        variant="contained"
-        style={{ marginRight: "2px", background: "#ff9f00" }}
-        onClick={() => addItemToCart()}
-      >
-        <Cart />
-        Add to Cart
-      </StyledButton>
-      <StyledButton
-        variant="contained"
-        style={{ marginRight: "2px", background: "#fb641b" }}
-        onClick={() => buyNow()}
-      >
-        <Flash />
-        Buy Now
-      </StyledButton>
-    </LeftContainer>
+    <>
+      <LeftContainer>
+        <Box
+          style={{
+            padding: "15px 20px",
+            border: "1px solid #f0f0f0",
+          }}
+        >
+          <Image src={product.detailUrl} alt="" />
+        </Box>
+        <StyledButton
+          variant="contained"
+          style={{ marginRight: "2px", background: "#ff9f00" }}
+          onClick={() => addItemToCart()}
+        >
+          <Cart />
+          Add to Cart
+        </StyledButton>
+        <StyledButton
+          variant="contained"
+          style={{ marginRight: "2px", background: "#fb641b" }}
+          onClick={() => buyNow()}
+        >
+          <Flash />
+          Buy Now
+        </StyledButton>
+      </LeftContainer>
+    </>
   );
 };
 
