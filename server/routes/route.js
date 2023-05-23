@@ -4,7 +4,7 @@ import {
   getProductById,
 } from "../controller/productController.js";
 import { userLogin, userSignup } from "../controller/userController.js";
-import { addPaymentGateway, paytmResponse } from "../controller/paymentController.js";
+import { stripePaymentGateway } from "../controller/stripePaymentController.cjs";
 
 const router = express.Router();
 
@@ -14,7 +14,6 @@ router.post("/login", userLogin);
 router.get("/products", getProducts);
 router.get("/product/:id", getProductById);
 
-router.post("/payment", addPaymentGateway);
-router.post("/callback", paytmResponse);
+router.post("/payment", stripePaymentGateway);
 
 export default router;

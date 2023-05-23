@@ -10,11 +10,11 @@ const StyledButton = styled(Button)`
   border-radius: 50%;
 `;
 
-const ButtonGroup = () => {
+const ButtonGroup = ({ quantity }) => {
   return (
     <Component>
       <StyledButton>-</StyledButton>
-      <Button disabled>1</Button>
+      <Button disabled>{quantity}</Button>
       <StyledButton>+</StyledButton>
     </Component>
   );

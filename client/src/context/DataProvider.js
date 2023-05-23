@@ -1,9 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const DataContext = createContext(null);
 
 const DataProvider = ({ children }) => {
-  const [account, setAccount] = useState();
+  const storedAccount =
+    localStorage.getItem("account") === "null"
+      ? null
+      : localStorage.getItem("account");
+
+  const [account, setAccount] = useState(storedAccount);
+
+  useEffect(() => {
+    localStorage.setItem("account", account);
+  }, [account]);
 
   return (
     <DataContext.Provider value={{ account, setAccount }}>

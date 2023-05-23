@@ -1,14 +1,16 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 import CartItem from "./CartItem";
 import TotalBalance from "./TotalBalance";
-import styled from "@emotion/styled";
 import EmptyCart from "./EmptyCart";
+import { DataContext } from "../../context/DataProvider";
 
-import { payUsingPaytm } from "../../service/api";
-import { post } from "../../utils/paytm";
+import { payUsingStripe } from "../../service/api";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Container = styled(Grid)`
   padding: 30px 135px;
@@ -51,17 +53,38 @@ const LeftComponent = styled(Grid)`
   }
 `;
 
+const stripePromise = loadStripe(
+  "pk_test_51N7c2ESAtE7P9nT4cm0T8ujTp8ijqecf1Ovv1adnvuYPJbZYZQcC6Lhz56tAUzwGip1MbUF8noyvK0vxaSaOJgMq00iM8v3UsZ"
+);
+
 const Cart = () => {
+  const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
+  const { account } = useContext(DataContext);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (!account) navigate("/");
+  }, [account]);
 
   const buyNow = async () => {
-    const response = await payUsingPaytm({ amount: 500, email: "chotu@gmail.com" });
-    let information = {
-      action: "https://securegw.paytm.in/order/process",
-      params: response,
+    if (!account) return;
+
+    const stripe = await stripePromise;
+    const requestBody = {
+      userName: account,
+      email: `${account}@gmail.com`,
+      products: { id: "124454", count: 1 },
     };
 
-    post(information);
+    const response = await payUsingStripe(requestBody);
+
+    await stripe.redirectToCheckout({
+      sessionId: response.id,
+    });
   };
 
   return (

@@ -89,12 +89,14 @@ const CustomButtons = () => {
       <Typography style={{ width: "135px" }}>Become a seller</Typography>
       <Typography>More</Typography>
 
-      <Container to="/cart">
-        <Badge badgeContent={cartItems?.length} color="secondary">
-          <ShoppingCartIcon />
-        </Badge>
-        <StyledCart>Cart</StyledCart>
-      </Container>
+      {account && (
+        <Container to="/cart">
+          <Badge badgeContent={cartItems?.length} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
+          <StyledCart>Cart</StyledCart>
+        </Container>
+      )}
 
       <LoginDialog open={open} setOpen={setOpen} />
     </Wrapper>
