@@ -1,13 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PaymentState from "./CheckoutState";
 
 const CheckoutFail = () => {
-  return (
-    <div>
-      Error while doing Payment
-      <Link to="/">Go to home</Link>
-    </div>
-  );
+  return <PaymentState state="fail" />;
 };
 
 export default CheckoutFail;

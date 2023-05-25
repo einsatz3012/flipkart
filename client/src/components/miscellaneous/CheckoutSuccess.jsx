@@ -1,13 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PaymentState from "./CheckoutState";
 
 const CheckoutSuccess = () => {
-  return (
-    <div>
-      Payment Completed
-      <Link to="/">Go to home</Link>
-    </div>
-  );
+  return <PaymentState state="success" />;
 };
 
 export default CheckoutSuccess;

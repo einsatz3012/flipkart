@@ -77,7 +77,10 @@ const Cart = () => {
     const requestBody = {
       userName: account,
       email: `${account}@gmail.com`,
-      products: { id: "124454", count: 1 },
+      products: cartItems.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      })),
     };
 
     const response = await payUsingStripe(requestBody);
