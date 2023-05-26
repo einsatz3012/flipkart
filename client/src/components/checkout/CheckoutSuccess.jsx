@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PaymentState from "./CheckoutState";
+import { useDispatch } from "react-redux";
+import { cartReset } from "../../redux/actions/cartActions";
 
 const CheckoutSuccess = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(cartReset);
+  }, [dispatch]);
+
   return (
     <PaymentState
       state="success"

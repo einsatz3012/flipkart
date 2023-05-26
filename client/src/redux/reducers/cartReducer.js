@@ -11,7 +11,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           ...state,
           cartItems: state.cartItems.map((data) =>
             data.id === exist.id
-              ? { ...data, quantity: data.quantity + 1 }
+              ? { ...data, quantity: data.quantity + item.quantity }
               : data
           ),
         };
@@ -26,6 +26,9 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           (product) => product.id !== action.payload
         ),
       };
+
+    case actionType.CART_RESET:
+      return { ...state, cartItems: [] };
 
     default:
       return state;

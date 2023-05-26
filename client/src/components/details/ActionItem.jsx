@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Snackbar, styled } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
 import React, { useContext, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -44,7 +44,6 @@ const ActionItem = ({ product }) => {
   const dispatch = useDispatch();
 
   const { account } = useContext(DataContext);
-  const [quantity] = useState(1);
   const [toastObject, setToastObject] = useState({ open: false, content: "" });
 
   const addItemToCart = () => {
@@ -54,7 +53,7 @@ const ActionItem = ({ product }) => {
         content: "Please login to add Items to Cart",
       });
 
-    dispatch(addToCart(product.id, quantity));
+    dispatch(addToCart(product.id, 1));
     navigate("/cart");
   };
 
