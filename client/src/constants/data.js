@@ -61,3 +61,6 @@ export const imageURL = [
   "https://rukminim1.flixcart.com/flap/960/960/image/084789479074d2b2.jpg",
   "https://rukminim1.flixcart.com/flap/960/960/image/1ce0c4c1fb501b45.jpg?q=50",
 ];
+
+export const notFoundImageURL =
+  "https://img1a.flixcart.com/www/linchpin/fk-cp-zion/img/error-500_f9bbb4.png";
