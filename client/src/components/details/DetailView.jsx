@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Box, Grid, styled } from "@mui/material";
 import ActionItem from "./ActionItem";
 import ProductDetail from "./ProductDetail";
+import NotFound from "../miscellaneous/NotFound";
 
 const Component = styled(Box)`
   margin-top: 55px;
@@ -36,7 +37,8 @@ const DetailView = () => {
 
   useEffect(() => {
     if (product && id !== product.id) dispatch(getProductDetails(id));
-  }, [dispatch, id, loading, product]);
+    else if (!product) dispatch(getProductDetails(id));
+  }, [id, dispatch, product]);
 
   const isProductExists = product && Object.keys(product).length > 0;
 
@@ -52,6 +54,8 @@ const DetailView = () => {
           </RightContainer>
         </Container>
       )}
+
+      {!loading && !isProductExists && <NotFound />}
     </Component>
   );
 };

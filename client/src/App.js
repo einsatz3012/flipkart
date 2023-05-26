@@ -11,6 +11,7 @@ import CheckoutFail from "./components/checkout/CheckoutFail";
 
 import DataProvider from "./context/DataProvider";
 import ProtectedRoute from "./components/miscellaneous/ProtectedRoute";
+import NotFound from "./components/miscellaneous/NotFound";
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Box>
       </BrowserRouter>
