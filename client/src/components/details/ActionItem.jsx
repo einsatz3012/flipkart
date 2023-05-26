@@ -1,4 +1,4 @@
-import { Box, Button, styled } from "@mui/material";
+import { Alert, Box, Button, Snackbar, styled } from "@mui/material";
 import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
 import React, { useContext, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 import { payUsingStripe } from "../../service/api";
 import { DataContext } from "../../context/DataProvider";
+import Toast from "../miscellaneous/Toast";
 
 const LeftContainer = styled(Box)`
   min-width: 40%;
@@ -44,18 +45,25 @@ const ActionItem = ({ product }) => {
 
   const { account } = useContext(DataContext);
   const [quantity] = useState(1);
+  const [toastObject, setToastObject] = useState({ open: false, content: "" });
 
   const addItemToCart = () => {
-    if (!account) {
-      return;
-    }
+    if (!account)
+      return setToastObject({
+        open: true,
+        content: "Please login to add Items to Cart",
+      });
 
     dispatch(addToCart(product.id, quantity));
     navigate("/cart");
   };
 
   const buyNow = async () => {
-    if (!account) return;
+    if (!account)
+      return setToastObject({
+        open: true,
+        content: "Please login to Purchase an Item",
+      });
 
     const stripe = await stripePromise;
     const requestBody = {
@@ -99,6 +107,8 @@ const ActionItem = ({ product }) => {
           Buy Now
         </StyledButton>
       </LeftContainer>
+
+      <Toast toastObject={toastObject} setToastObject={setToastObject} />
     </>
   );
 };

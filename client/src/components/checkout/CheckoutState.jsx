@@ -43,21 +43,13 @@ const StyledLink = styled(Link)`
   font-weight: bold;
 `;
 
-const PaymentState = ({ state }) => {
+const PaymentState = ({ state, message }) => {
   return (
     <Wrapper>
       <Container>
-        <Image
-          src={state === "fail" ? failedSVG : successSVG}
-          alt={`Payment ${state === "fail" ? "Unsuccessful" : "Successful"}`}
-          srcset=""
-        />
+        <Image src={state === "fail" ? failedSVG : successSVG} alt={message} />
         <LinkContainer>
-          <Typography>
-            {state === "fail"
-              ? "Couldn't complete purchase! Sorry for the incovenience caused"
-              : "Thank You for the purchase! Happy to Server You."}
-          </Typography>
+          <Typography>{message}</Typography>
           <StyledLink to="/">Go to home</StyledLink>
         </LinkContainer>
       </Container>
