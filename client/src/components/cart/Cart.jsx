@@ -1,7 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import CartItem from "./CartItem";
@@ -58,17 +57,12 @@ const stripePromise = loadStripe(
 );
 
 const Cart = () => {
-  const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
   const { account } = useContext(DataContext);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
-
-  useEffect(() => {
-    if (!account) navigate("/");
-  }, [account]);
 
   const buyNow = async () => {
     if (!account) return;

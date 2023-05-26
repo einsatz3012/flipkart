@@ -6,10 +6,11 @@ import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Cart from "./components/cart/Cart";
 import DetailView from "./components/details/DetailView";
-import CheckoutSuccess from "./components/miscellaneous/CheckoutSuccess";
-import CheckoutFail from "./components/miscellaneous/CheckoutFail";
+import CheckoutSuccess from "./components/checkout/CheckoutSuccess";
+import CheckoutFail from "./components/checkout/CheckoutFail";
 
 import DataProvider from "./context/DataProvider";
+import ProtectedRoute from "./components/miscellaneous/ProtectedRoute";
 
 function App() {
   return (
@@ -20,9 +21,30 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<DetailView />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout/success" element={<CheckoutSuccess />} />
-            <Route path="/checkout/fail" element={<CheckoutFail />} />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout/success"
+              element={
+                <ProtectedRoute>
+                  <CheckoutSuccess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout/fail"
+              element={
+                <ProtectedRoute>
+                  <CheckoutFail />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Box>
       </BrowserRouter>
