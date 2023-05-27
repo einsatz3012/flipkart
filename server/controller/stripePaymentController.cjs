@@ -5,6 +5,8 @@ const fetch = (...args) =>
 config();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const SERVER_BASE_URL = process.env.SERVER_BASE_URL;
+const CLIENT_BASE_URL = process.env.CLIENT_BASE_URL;
 
 async function stripePaymentGateway(req, res) {
   try {
@@ -13,7 +15,7 @@ async function stripePaymentGateway(req, res) {
     const lineItems = await Promise.all(
       productsList.map(async (product) => {
         const response = await fetch(
-          `http://localhost:8000/product/${product.id}`
+          `${SERVER_BASE_URL}/product/${product.id}`
         );
         const item = await response.json();
 
@@ -60,8 +62,8 @@ async function stripePaymentGateway(req, res) {
       mode: "payment",
       shipping_options: shippingOptions,
       line_items: lineItems,
-      success_url: "http://localhost:3000/checkout/success",
-      cancel_url: "http://localhost:3000/checkout/fail",
+      success_url: `${CLIENT_BASE_URL}/checkout/success`,
+      cancel_url: `${CLIENT_BASE_URL}/checkout/fail`,
     });
     res.status(200).json({ id: session.id });
   } catch (error) {
