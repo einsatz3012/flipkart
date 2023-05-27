@@ -2,7 +2,7 @@ import axios from "axios";
 
 import * as actionTypes from "../constants/productConstants";
 
-const URL = "http://localhost:8000";
+const URL = "https://talkative-backend-3qaa.onrender.com";
 
 export const getProducts = () => async (dispatch) => {
   try {
