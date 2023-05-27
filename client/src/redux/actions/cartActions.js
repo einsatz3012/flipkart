@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionType from "../constants/cartConstant";
 
-const URL = "https://talkative-backend-3qaa.onrender.com";
+const URL = "https://flipcart-bo50.onrender.com";
 
 export const addToCart = (id, quantity) => async (dispatch) => {
   try {
