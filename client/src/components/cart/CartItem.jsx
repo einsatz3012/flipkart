@@ -10,12 +10,26 @@ const Component = styled(Box)`
   border-top: 1px solid #f0f0f0;
   display: flex;
   background: #ffffff;
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftComponent = styled(Box)`
   margin: 20px;
   display: flex;
-  flex-direction: column;s
+  flex-direction: column;
+
+  img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 450px) {
+    align-items: center;
+  }
 `;
 
 const SmallText = styled(Typography)`
@@ -44,11 +58,7 @@ const CartItem = ({ item }) => {
   return (
     <Component>
       <LeftComponent>
-        <img
-          src={item.url}
-          alt={item.title.shortTitle}
-          style={{ width: "110px", height: "110px" }}
-        />
+        <img src={item.url} alt={item.title.shortTitle} />
         <ButtonGroup id={item.id} quantity={item.quantity} />
       </LeftComponent>
       <Box style={{ margin: "20px" }}>
