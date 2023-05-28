@@ -8,10 +8,10 @@ import Cart from "./components/cart/Cart";
 import DetailView from "./components/details/DetailView";
 import CheckoutSuccess from "./components/checkout/CheckoutSuccess";
 import CheckoutFail from "./components/checkout/CheckoutFail";
+import NotFound from "./components/miscellaneous/NotFound";
 
 import DataProvider from "./context/DataProvider";
 import ProtectedRoute from "./components/miscellaneous/ProtectedRoute";
-import NotFound from "./components/miscellaneous/NotFound";
 
 function App() {
   return (
