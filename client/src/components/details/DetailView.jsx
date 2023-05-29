@@ -28,6 +28,10 @@ const RightContainer = styled(Grid)`
   & > p {
     margin-top: 10px;
   }
+
+  @media screen and (max-width: 450px) {
+    padding-left: 20px;
+  }
 `;
 
 const DetailView = () => {
