@@ -28,6 +28,10 @@ const ButtonWrapper = styled(Box)`
   padding: 16px 22px;
   background: #ffffff;
   box-shadow: 0 -2px 10px 0 rgb(0 0 0 / 10%);
+
+  @media screen and (max-width: 450px) {
+    padding: 16px 10px
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -41,6 +45,10 @@ const StyledButton = styled(Button)`
 
   &:hover {
     background: #fb641b;
+  }
+
+  @media screen and (max-width: 450px) {
+    margin: 0 auto;
   }
 `;
 

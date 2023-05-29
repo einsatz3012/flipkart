@@ -1,15 +1,16 @@
-import { Box, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material";
-import { LocalOffer as Badge } from "@mui/icons-material"
+import { Box, Typography } from "@mui/material";
+import { LocalOffer as Badge } from "@mui/icons-material";
 import React from "react";
 import styled from "@emotion/styled";
 
-const ProductDetail = ({product}) => {
+const ProductDetail = ({ product }) => {
   const fassured =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png";
 
-  const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
-  
-  const date = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000));
+  const adURL =
+    "https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50";
+
+  const date = new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000);
 
   const SmallText = styled(Box)`
     font-size: 14px;
@@ -22,27 +23,42 @@ const ProductDetail = ({product}) => {
 
   const StyledBadge = styled(Badge)`
     margin-right: 2px;
-    color: #00CC00;
+    color: #00cc00;
     font-size: 15px;
   `;
 
-  const ColumnText = styled(TableRow)`
+  const StyledGrid = styled(Box)`
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 2em;
+    padding: 20px;
     font-size: 14px;
-    vertical-align: baseline;
-    & > td, & p {
-      font-size: 14px;
-      margin-top: 10px;
-      border: none;
-    }
   `;
-    
+
+  const DetailsTitle = styled(Typography)`
+    color: #878787;
+  `;
+
+  const SuperCoinImage = styled(Box)`
+    grid-column-start: 1;
+    grid-column-end: 3;
+  `;
+
   return (
     <>
       <Typography>{product.title.longTitle}</Typography>
-      <Typography style={{maringTop: "5px", color: "#878787", fontSize: "14px"}} >
+      <Typography
+        style={{ maringTop: "5px", color: "#878787", fontSize: "14px" }}
+      >
         8 Ratings & 1 Review
         <Box component="span">
-          <img src={fassured} alt="Flipkart Assured" style={{ width: "77px", marginLeft: "20px" }} />
+          <img
+            src={fassured}
+            alt="Flipkart Assured"
+            style={{ width: "77px", marginLeft: "20px" }}
+          />
         </Box>
       </Typography>
 
@@ -62,41 +78,55 @@ const ProductDetail = ({product}) => {
 
       <Typography>Available Offers</Typography>
       <SmallText>
-        <Typography><StyledBadge /> Get extra 20% off upto ₹50 on 1 item(s) </Typography>
-        <Typography><StyledBadge /> Get extra 13% off (price exlusive of discount) </Typography>
-        <Typography><StyledBadge /> Sign up for Flipkart Pay Later and get Flipkart Gifts Card worth ₹100 </Typography>
+        <Typography>
+          <StyledBadge /> Get extra 20% off upto ₹50 on 1 item(s)
+        </Typography>
+        <Typography>
+          <StyledBadge /> Get extra 13% off (price exlusive of discount)
+        </Typography>
+        <Typography>
+          <StyledBadge /> Sign up for Flipkart Pay Later and get Flipkart Gifts
+          Card worth ₹100
+        </Typography>
       </SmallText>
 
-      <Table>
-        <TableBody>
-          <ColumnText>
-            <TableCell style={{color: "#878787"}}>Delivery</TableCell>
-            <TableCell style={{fontWeight: "bold"}}>Delivery By {date.toDateString()} | ₹40 </TableCell>
-          </ColumnText>
-          <ColumnText>
-            <TableCell style={{color: "#878787"}}>Warranty</TableCell>
-            <TableCell>No Warranty</TableCell>
-          </ColumnText>
-          <ColumnText>
-            <TableCell style={{color: "#878787"}}>Seller</TableCell>
-            <TableCell>
-              <Box style={{color: "#2874F0"}}>SuperComNet</Box>
-              <Typography>GST Invoice Available</Typography>
-              <Typography>View more sellers starting from ₹{product.price.cost}</Typography>
-            </TableCell>
-          </ColumnText>
-          <ColumnText>
-            <TableCell colSpan="2" style={{color: "#878787"}}>
-              <img src={adURL} style={{width: '390px'}} alt="flipkartpoints" />
-            </TableCell>
-          </ColumnText>
-          <ColumnText>
-            <TableCell style={{color: "#878787"}}>Descripion</TableCell>
-            <TableCell>{product.description}
-          </TableCell>
-          </ColumnText>
-        </TableBody>
-      </Table>
+      <StyledGrid>
+        <Box>
+          <DetailsTitle>Delivery</DetailsTitle>
+        </Box>
+        <Box>
+          <strong>Delivery By {date.toDateString()} | ₹40</strong>
+        </Box>
+
+        <Box>
+          <DetailsTitle>Warranty</DetailsTitle>
+        </Box>
+        <Box>No Warranty</Box>
+
+        <Box>
+          <DetailsTitle>Seller</DetailsTitle>
+        </Box>
+        <Box>
+          <Box>
+            <Typography style={{ color: "#2874F0" }}>SuperComNet</Typography>
+          </Box>
+          GST Invoice Available <br />
+          View more sellers starting from ₹{product.price.cost}
+        </Box>
+
+        <SuperCoinImage>
+          <img
+            src={adURL}
+            style={{ width: "390px", maxWidth: "100%" }}
+            alt="flipkartpoints"
+          />
+        </SuperCoinImage>
+
+        <Box>
+          <DetailsTitle>Descripion</DetailsTitle>
+        </Box>
+        <Box>{product.description}</Box>
+      </StyledGrid>
     </>
   );
 };
