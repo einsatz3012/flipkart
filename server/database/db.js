@@ -16,6 +16,3 @@ const Connection = async (username, password) => {
 };
 
 export default Connection;
-
-// einsatz
-// h2sPT39rxJWuqAvV
